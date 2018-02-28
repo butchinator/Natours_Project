@@ -1,0 +1,67 @@
+.btn {
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        /* element will occupy it's own space */
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        /* position set to relative. &::after can be moved to match */
+        position: relative;
+        font-size: 1.6rem;
+        
+    }
+
+    &:hover {
+        transform: translateY(-.3rem);
+        /* box-shadow in x axis, y axis, blur, color with 20% opacity */
+        box-shadow: 0 1rem 2rem rgba($color-black,.2);
+
+        /* after psuedo element becomes visible after button hovered */
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
+        }
+    }
+
+    &:active {
+        transform: translateY(.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color: $color-grey-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &::after {
+        /* to make after psuedo element appear on page specify content property*/
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        /* move btn::after so position matches btn */
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* set position is behind (underneath) btn */
+        z-index: -1;
+        /* animate the scale effect */
+        transition: all .4s;
+
+    }
+
+    &--animated {
+        /* shorthand with delay */
+        animation: moveInBottom .5s ease-out .75s;
+        /* apply 0% properties before animation start */
+        animation-fill-mode: backwards;
+    }
+}
